@@ -40,7 +40,7 @@
       </map>
     </option>
   </component>
-  <component name="IdProvider" IDEtalkID="F727CB5BCB4FDAC71DFE820F18E9E8D0" />
+  <component name="IdProvider" IDEtalkID="374BE3E78B64752120B1BB96157EED3A" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -176,6 +176,8 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$/../../finagle/privilege" value="1458348568000" />
+        <entry key="$PROJECT_DIR$/../../hadoop/hbrdd" value="1461201978234" />
+        <entry key="$PROJECT_DIR$/../../hadoop/kafka-spark-streaming-to-hbase" value="1461115132895" />
         <entry key="$PROJECT_DIR$/../../scala/hello_finagle/hello_finagle" value="1458644043575" />
       </map>
     </option>
