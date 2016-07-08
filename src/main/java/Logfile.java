@@ -33,7 +33,7 @@ public class Logfile {
 
     //属性指定
     private static Configuration conf = new Configuration();
-    private static String file_profix = "http://master1:19888/ws/v1/history/mapreduce/jobs/";
+    private static String file_profix = Constant.FILE_PROFIX;
     private static List<String> filenames = new ArrayList<String>();
     private static String jobid = "";
     private static int success_file_count = 0;
@@ -208,8 +208,8 @@ public class Logfile {
         props.setProperty("failed_file_count", failed_file_count + "");
         props.setProperty("success_file_count", success_file_count + "");
         props.setProperty("log_url", log_url);
-        String log_summary_url = "http://192.168.2.250:6379";
-        String task_log_url = "http://192.168.2.250:6378";
+        String log_summary_url = Constant.LOG_SUNMMARY_URL;
+        String task_log_url = Constant.TASK_LOG_URL;
 
 
         List<FileStatus> outputList = new ArrayList<FileStatus>();
@@ -222,14 +222,18 @@ public class Logfile {
 
             }
         }
-        //服务细微入hbase
+
+        String split = Constant.SPLIT_CH;
+        String split_jt = Constant.SPLIT_JOBTASK;
+
+        //服务入hbase
         if (failed_file_count > 0) {
-            new HttpUtil().sendPost(log_summary_url, jobid + "_" + task_id + "&" + start_time + "&" + end_time + "&" + "FAILED" + "&" + sb.toString());
-            new HttpUtil().sendPost(task_log_url, user + "&" + jobid + "&" + start_time + "&" + end_time + "&" + "FAILED");
+            new HttpUtil().sendPost(log_summary_url, jobid + split_jt + task_id + split + start_time + split + end_time + split + "FAILED" + split + sb.toString());
+            new HttpUtil().sendPost(task_log_url, user + split + jobid + split + start_time + split + end_time + split + "FAILED");
 
         } else {
-            new HttpUtil().sendPost(log_summary_url, jobid + "_" + task_id + "&" + start_time + "&" + end_time + "&" + "SUCCEED" + "&" + sb.toString());
-            new HttpUtil().sendPost(task_log_url, user + "&" + jobid + "&" + start_time + "&" + end_time + "&" + "SUCCEED");
+            new HttpUtil().sendPost(log_summary_url, jobid + split_jt + task_id + split + start_time + split + end_time + split + "SUCCEED" + split + sb.toString());
+            new HttpUtil().sendPost(task_log_url, user + split + jobid + split + start_time + split + end_time + split + "SUCCEED");
         }
 
         OutputStream os = new FileOutputStream(file);
